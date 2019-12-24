@@ -1,0 +1,11 @@
+# OS-generated files
+Thumbs.db
+.DS_Store
+.Trash-*
+
+# Only .lqm files in tests
+tests/*
+!tests/*.lqm
+
+# Unused content
+unused/

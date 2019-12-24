@@ -1,0 +1,31 @@
+/* Normal */
+@font-face {
+  font-family: 'LG Smart';
+  font-style: normal;
+  font-weight: normal;
+  src: local('LG Smart'), local('LG-Smart'), url('lg-smart/regular.woff') format('woff');
+}
+
+/* Italic */
+@font-face {
+  font-family: 'LG Smart';
+  font-style: italic;
+  font-weight: normal;
+  src: local('LG Smart Italic'), local('LG-Smart-Italic'), url('lg-smart/italic.woff') format('woff');
+}
+
+/* Bold */
+@font-face {
+  font-family: 'LG Smart';
+  font-style: normal;
+  font-weight: bold;
+  src: local('LG Smart Bold'), local('LG-Smart-Bold'), url('lg-smart/bold.woff') format('woff');
+}
+
+/* Bold Italic */
+@font-face {
+  font-family: 'LG Smart';
+  font-style: italic;
+  font-weight: bold;
+  src: local('LG Smart Bold Italic'), local('LG-Smart-Bold-Italic'), url('lg-smart/bold-italic.woff') format('woff');
+}

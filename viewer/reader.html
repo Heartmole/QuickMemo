@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickMemo+ Reader</title>
+  <link rel="stylesheet" type="text/css" href="vendor/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="reader.css">
+</head>
+<body>
+  <div class="container p-4">
+    <h3 class="mb-0">QuickMemo+ Reader</h3>
+    <div class="row">
+      <!-- Preview -->
+      <div class="col-md-8 mt-4">
+        <h5>Preview</h5>
+        <div class="text-center"></div>
+        <div class="card">
+          <div class="card-body">{{content}}</div>
+        </div>
+      </div>
+      <!-- Controls -->
+      <div class="col-md-4 order-md-first mt-4">
+        <!-- Dimensions -->
+        <h5>Dimensions</h5>
+        <div class="row">
+          <div class="col-6 form-group">
+            <label for="width">Width (px):</label>
+            <input type="number" id="width" class="form-control" value="360" min="320" max="600">
+          </div>
+          <div class="col-6 form-group">
+            <label for="height">Height (px):</label>
+            <input type="number" id="height" class="form-control" value="640" min="480" max="800">
+          </div>
+        </div>
+        <!-- Font type -->
+        <h5>Font type</h5>
+        <div class="form-check">
+          <input type="radio" name="font" id="font-roboto" class="form-check-input" value="roboto" checked="">
+          <label for="font-roboto" class="form-check-label">Roboto</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" name="font" id="font-lg-smart" class="form-check-input" value="lg-smart">
+          <label for="font-roboto" class="form-check-label">LG Smart</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" name="font" id="font-travel" class="form-check-input" value="travel">
+          <label for="font-roboto" class="form-check-label">Travel</label>
+        </div>
+        <!-- TODO -->
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="reader.js"></script>
+</body>
+</html>
