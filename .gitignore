@@ -9,3 +9,5 @@ tests/*
 
 # Unused content
 unused/
+/extractor-javafx/target/
+/quickmemo-extractor/target/

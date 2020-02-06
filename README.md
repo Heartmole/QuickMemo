@@ -1,2 +1,2 @@
 # QuickMemo
-LG QuickMemo+ reader and extractor
+QuickMemo+ reader and extractor

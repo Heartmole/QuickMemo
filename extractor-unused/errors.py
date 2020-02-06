@@ -1,0 +1,2 @@
+class QuickMemoException(Exception):
+	pass
