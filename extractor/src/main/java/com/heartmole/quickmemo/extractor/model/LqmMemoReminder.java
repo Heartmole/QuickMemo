@@ -32,14 +32,12 @@ public class LqmMemoReminder {
     @SerializedName("RemindTime")
     private long remindTime;
 
-    public LqmMemoReminder() {
-        // Constructor por defecto requerido por Gson.
-    }
+    /** Default constructor required by Gson. */
+    public LqmMemoReminder() {}
 
     public Date getModifiedTime() {
         return new Date(modifiedTime);
     }
-
     public Date getRemindTime() {
         return new Date(remindTime);
     }

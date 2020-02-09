@@ -53,12 +53,10 @@ public class LqmExtractor extends JFrame {
 
         title = new javax.swing.JLabel();
         familyLabel = new javax.swing.JLabel();
-        sizeLabel = new javax.swing.JLabel();
         familyInput = new javax.swing.JComboBox<>();
         progressBar = new javax.swing.JProgressBar();
         outputLabel = new javax.swing.JLabel();
         outputInput = new javax.swing.JComboBox<>();
-        sizeInput = new javax.swing.JSpinner();
         separator = new javax.swing.JSeparator();
         load = new javax.swing.JButton();
         extract = new javax.swing.JButton();
@@ -72,15 +70,11 @@ public class LqmExtractor extends JFrame {
 
         familyLabel.setText("Font family:");
 
-        sizeLabel.setText("Font size:");
-
         familyInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Roboto", "LG Smart" }));
 
         outputLabel.setText("Output type:");
 
         outputInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HTML", "Plain text" }));
-
-        sizeInput.setValue(14);
 
         load.setText("Load file");
         load.addActionListener(new java.awt.event.ActionListener() {
@@ -91,8 +85,15 @@ public class LqmExtractor extends JFrame {
 
         extract.setText("Extract to...");
         extract.setEnabled(false);
+        extract.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                extractActionPerformed(evt);
+            }
+        });
 
+        textarea.setEditable(false);
         textarea.setColumns(20);
+        textarea.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         textarea.setRows(5);
         textareaScroll.setViewportView(textarea);
 
@@ -112,13 +113,9 @@ public class LqmExtractor extends JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(outputInput, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sizeLabel)
-                            .addComponent(familyLabel))
+                        .addComponent(familyLabel)
                         .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(familyInput, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(sizeInput)))
+                        .addComponent(familyInput, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(load)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -136,22 +133,18 @@ public class LqmExtractor extends JFrame {
                     .addComponent(familyLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sizeLabel)
-                    .addComponent(sizeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(outputLabel)
                     .addComponent(outputInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(load)
                     .addComponent(extract))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textareaScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textareaScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -172,6 +165,15 @@ public class LqmExtractor extends JFrame {
             }
         }
     }//GEN-LAST:event_loadActionPerformed
+
+    private void extractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extractActionPerformed
+        if (reader == null) return;
+        try {
+            reader.extract(null, 0);
+        } catch (LqmException ex) {
+            LOGGER.log(Level.SEVERE, "Error while extracting file", ex);
+        }
+    }//GEN-LAST:event_extractActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,8 +201,6 @@ public class LqmExtractor extends JFrame {
     private javax.swing.JLabel outputLabel;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JSeparator separator;
-    private javax.swing.JSpinner sizeInput;
-    private javax.swing.JLabel sizeLabel;
     private javax.swing.JTextArea textarea;
     private javax.swing.JScrollPane textareaScroll;
     private javax.swing.JLabel title;

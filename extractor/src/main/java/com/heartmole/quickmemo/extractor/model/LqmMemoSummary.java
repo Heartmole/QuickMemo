@@ -18,12 +18,16 @@
 package com.heartmole.quickmemo.extractor.model;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.Date;
 
 /**
  *
  * @author Heartmole
  */
 public class LqmMemoSummary {
+
+    public static final int STYLE_NORMAL = 0;
+    public static final int STYLE_STRIPPED = 1;
 
     @SerializedName("CreatedTime")
     private long createdTime;
@@ -51,5 +55,33 @@ public class LqmMemoSummary {
 
     @SerializedName("Style")
     private int style;
+
+    public Date getCreatedTime() {
+        return new Date(createdTime);
+    }
+    public Date getModifiedTime() {
+        return new Date(modifiedTime);
+    }
+    public int getWidth() {
+        return width;
+    }
+    public int getHeight() {
+        return height;
+    }
+    public int getFontSize() {
+        return fontSize;
+    }
+    public int getColor() {
+        return color;
+    }
+    public String getDrawImage() {
+        return drawImage;
+    }
+    public String getPreviewImage() {
+        return previewImage;
+    }
+    public int getStyle() {
+        return style;
+    }
 
 }

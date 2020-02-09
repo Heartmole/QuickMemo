@@ -17,10 +17,15 @@
 
 package com.heartmole.quickmemo.extractor.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  *
  * @author Heartmole
  */
 public class LqmMemoPath {
+
+    @SerializedName("Id")
+    private int id;
 
 }

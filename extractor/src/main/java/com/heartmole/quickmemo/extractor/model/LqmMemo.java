@@ -35,6 +35,25 @@ public class LqmMemo {
     @SerializedName("MemoPathList")
     private List<LqmMemoPath> memoPathList;
     
+    @SerializedName("Reminder")
     private LqmMemoReminder reminder;
+
+    /** Default constructor required by Gson. */
+    public LqmMemo() {}
+
+    /// <editor-fold desc="[Getters]">
+    public LqmMemoSummary getMemo() {
+        return memo;
+    }
+    public List<LqmMemoObject> getMemoObjectList() {
+        return memoObjectList;
+    }
+    public List<LqmMemoPath> getMemoPathList() {
+        return memoPathList;
+    }
+    public LqmMemoReminder getReminder() {
+        return reminder;
+    }
+    /// </editor-fold>
 
 }

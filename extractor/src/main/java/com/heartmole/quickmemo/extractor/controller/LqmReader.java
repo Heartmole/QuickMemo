@@ -17,17 +17,19 @@
 package com.heartmole.quickmemo.extractor.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.heartmole.quickmemo.extractor.model.LqmMemo;
+import com.heartmole.quickmemo.extractor.model.LqmMemoObject;
 import com.heartmole.quickmemo.extractor.util.LqmException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.logging.Level;
+import java.io.Reader;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 
 /**
  * A reader for LG QuickMemo+ files. This class can read .LQM files, which are
@@ -38,9 +40,13 @@ import java.util.zip.ZipInputStream;
  */
 public class LqmReader {
 
-    private static final Logger LOGGER = Logger.getLogger(LqmReader.class.getName());
+    private static final Logger LOGGER = Logger.getLogger("LqmReader");
     private static final String MEMOINFO_FILENAME = "memoinfo.jlqm";
     private static final String METADATA_FILENAME = "metadata.mtd";
+    private static final String FOLDER_AUDIOS = "audios/";
+    private static final String FOLDER_DRAWINGS = "drawings/";
+    private static final String FOLDER_IMAGES = "images/";
+    private static final String FOLDER_VIDEOS = "videos/";
     private static final int METADATA_VERSION = 10;
 
     private final File path;
@@ -82,15 +88,23 @@ public class LqmReader {
      */
     public void extract(File destination, int type) throws LqmException {
         try (ZipFile zip = new ZipFile(path)) {
-            // Get the QuickMemo+ memoinfo file
-            ZipEntry memoinfo = zip.getEntry(MEMOINFO_FILENAME);
-            if (memoinfo == null) {
-                throw new LqmException("QuickMemo+ memo information file could "
-                        + "not be read during extraction.");
+            // Parse the QuickMemo+ memoinfo file as JSON
+            ZipEntry entry = zip.getEntry(MEMOINFO_FILENAME);
+            InputStream stream = zip.getInputStream(entry);
+            Reader reader = new InputStreamReader(stream, "UTF-8");
+            LqmMemo memoinfo = new Gson().fromJson(reader, LqmMemo.class);
+            // TEST
+            for (LqmMemoObject object : memoinfo.getMemoObjectList()) {
+                LOGGER.info(String.format("\nType: %d\nDesc: %s\nFile: %s",
+                        object.getType(), object.getDescription(),
+                        object.getFilename()));
             }
-            // Parse the memoinfo file as JSON
-            InputStream stream = zip.getInputStream(memoinfo);
-            new Gson().fromJson(new InputStreamReader(stream), LqmMemo.class);
+        } catch (JsonParseException ex) {
+            throw new LqmException("Could not parse memo information from the "
+                    + "QuickMemo+ file correctly.", ex);
+        } catch (NullPointerException ex) {
+            throw new LqmException("Could not find memo information file "
+                    + "entry in the QuickMemo+ file.", ex);
         } catch (IOException ex) {
             throw new LqmException("Unknown error during extraction of the "
                     + "QuickMemo+ file.", ex);

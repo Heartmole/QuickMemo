@@ -25,13 +25,70 @@ import com.google.gson.annotations.SerializedName;
  */
 public class LqmMemoObject {
 
+    public static final int TYPE_TEXT = 0;
+    public static final int TYPE_IMAGE = 1;
+    public static final int TYPE_VOICE = 3;
+    public static final int TYPE_VIDEO = 4;
+    public static final int TYPE_CHECKBOX = 5;
+    public static final int TYPE_DRAWING = 6;
+
     @SerializedName("Id")
     private int id;
-
+    @SerializedName("Type")
+    private int type;
+    @SerializedName("Height")
+    private int height;
+    @SerializedName("Width")
+    private int width;
+    @SerializedName("X")
+    private int x;
+    @SerializedName("Y")
+    private int y;
     @SerializedName("Desc")
-    private String desc;
-
+    private String description;
     @SerializedName("DescRaw")
-    private String descRaw;
+    private String rawDescription;
+    @SerializedName("OrderNum")
+    private int order;
+    @SerializedName("FileName")
+    private String filename;
+    @SerializedName("IsChecked")
+    private int checked;
+
+    /// <editor-fold desc="[Getters]">
+    public int getId() {
+        return id;
+    }
+    public int getType() {
+        return type;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public String getRawDescription() {
+        return rawDescription;
+    }
+    public int getHeight() {
+        return height;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+    public int getOrder() {
+        return order;
+    }
+    public String getFilename() {
+        return filename;
+    }
+    public int getChecked() {
+        return checked;
+    }
+    /// </editor-fold>
 
 }

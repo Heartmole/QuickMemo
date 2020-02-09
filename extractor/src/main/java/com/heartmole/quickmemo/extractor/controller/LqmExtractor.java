@@ -20,6 +20,6 @@ package com.heartmole.quickmemo.extractor.controller;
  *
  * @author Heartmole
  */
-public class LqmMemoReader {
+public class LqmExtractor {
 
 }
